@@ -1,6 +1,6 @@
-# (_TODO: fill in the title of this assignment here!_)
+# Trees
 
-Authors: (_TODO: fill in your names here!_)
+Authors: Daniel, Thomas
 
 ## Build commands
 
@@ -13,3 +13,11 @@ Authors: (_TODO: fill in your names here!_)
 *   (_TODO: fill in resources here!_)
 *   ...
 *   ...
+
+## Part 1
+
+If the node is empty, it is false.
+If the node's value is v, it is true. 
+Else, check if the left or the right subtree contains v. 
+
+## Part 2
