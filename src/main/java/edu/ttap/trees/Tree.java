@@ -87,11 +87,25 @@ public class Tree<T> {
     ///// Part 1: Contains
 
     /**
+     * @param node the root of the tree
+     * @param value the value to search for
+     * @return if the tree contains value
+     */
+    private boolean containsH(Node<T> node, T value) {
+        if (node == null) {
+            return false;
+        } else if (node.value == value) {
+            return true;
+        } else {
+            return containsH(node.left, value) || containsH(node.right, value);
+        }
+    }
+    /**
      * @param value the value to search for
      * @return true iff the tree contains <code>value</code>
      */
     public boolean contains(T value) {
-        throw new UnsupportedOperationException();
+        return containsH(root, value);
     }
 
     ///// Part 2: Traversals
