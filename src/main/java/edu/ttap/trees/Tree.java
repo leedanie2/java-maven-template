@@ -1,6 +1,7 @@
 package edu.ttap.trees;
 
 import java.util.List;
+import java.util.LinkedList;
 
 /**
  * A generic binary tree implementation.
@@ -114,7 +115,22 @@ public class Tree<T> {
      * @return the elements of this tree collected via an in-order traversal
      */
     public List<T> toListInorder() {
-        throw new UnsupportedOperationException();
+        return toListInOrderH(this.root);
+    }
+
+    public List<T> toListInOrderH (Node<T> cur) {
+        List<T> list = new LinkedList<>();
+        if(cur == null) { // empty tree
+            return list;
+        } else if (cur.left != null) {
+            toListInOrderH(cur.left);
+        } else if (cur.right != null) {
+            list.add(cur.value);
+            toListInOrderH(cur.right);
+        } else { // leaf
+            list.add(cur.value);
+        }
+        return list;
     }
 
     /**
