@@ -115,36 +115,54 @@ public class Tree<T> {
      * @return the elements of this tree collected via an in-order traversal
      */
     public List<T> toListInorder() {
-        return toListInOrderH(this.root);
+        LinkedList<T> list = new LinkedList<>();
+        toListInOrderH(this.root, list);
+        return list;
     }
 
-    public List<T> toListInOrderH (Node<T> cur) {
-        List<T> list = new LinkedList<>();
-        if(cur == null) { // empty tree
-            return list;
-        } else if (cur.left != null) {
-            toListInOrderH(cur.left);
-        } else if (cur.right != null) {
-            list.add(cur.value);
-            toListInOrderH(cur.right);
-        } else { // leaf
-            list.add(cur.value);
+    public void toListInOrderH (Node<T> cur, LinkedList<T> list) {
+        if(cur == null) {
+            return;
         }
-        return list;
+        toListInOrderH(cur.left, list);
+        list.add(cur.value);
+        toListInOrderH(cur.right, list);
     }
 
     /**
      * @return the elements of this tree collected via a pre-order traversal
      */
     public List<T> toListPreorder() {
-        throw new UnsupportedOperationException();
+        LinkedList<T> list = new LinkedList<>();
+        toListPreOrderH(this.root, list);
+        return list;
+    }
+
+    public void toListPreOrderH (Node<T> cur, LinkedList<T> list) {
+        if(cur == null) {
+            return;
+        }
+        list.add(cur.value);
+        toListPreOrderH(cur.left, list);
+        toListPreOrderH(cur.right, list);
     }
 
     /**
      * @return the elements of this tree collected via a post-order traversal
      */
     public List<T> toListPostorder() {
-        throw new UnsupportedOperationException();
+        LinkedList<T> list = new LinkedList<>();
+        toListPostOrderH(this.root, list);
+        return list;
+    }
+
+    public void toListPostOrderH (Node<T> cur, LinkedList<T> list) {
+        if(cur == null) {
+            return;
+        }
+        toListPostOrderH(cur.left, list);
+        toListPostOrderH(cur.right, list);
+        list.add(cur.value);
     }
 
     ///// Part 3: Stringifying Trees
