@@ -120,6 +120,10 @@ public class Tree<T> {
         return list;
     }
 
+    /**
+     * @param cur current node that is being traversed in-order
+     * @param list cumulative list that contains all the elements in-order
+     */
     public void toListInOrderH (Node<T> cur, LinkedList<T> list) {
         if(cur == null) {
             return;
@@ -138,6 +142,10 @@ public class Tree<T> {
         return list;
     }
 
+    /**
+     * @param cur current node that is being traversed pre-order
+     * @param list cumulative list that contains all the elements pre-order
+     */
     public void toListPreOrderH (Node<T> cur, LinkedList<T> list) {
         if(cur == null) {
             return;
@@ -156,6 +164,10 @@ public class Tree<T> {
         return list;
     }
 
+    /**
+     * @param cur current node that is being traversed post-order
+     * @param list cumulative list that contains all the elements post-order
+     */
     public void toListPostOrderH (Node<T> cur, LinkedList<T> list) {
         if(cur == null) {
             return;

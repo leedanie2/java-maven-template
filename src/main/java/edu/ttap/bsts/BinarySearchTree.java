@@ -99,6 +99,10 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
         return containsH(root, v);
     }
 
+    /**
+     * @param cur the current node we are checking
+     * @param v the value we want to find
+     */
     public boolean containsH(Node<T> cur, T v) {
         if (cur == null) {
             return false;
@@ -130,6 +134,10 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
         return list;
     }
 
+    /**
+     * @param cur current node you are traversing through in order
+     * @param list cumulative list that contains elements of bst
+     */
     public void toListH (Node<T> cur, LinkedList<T> list) {
         if(cur == null) {
             return;
