@@ -23,11 +23,19 @@ public class BinarySearchTreeTest {
 
     private BinarySearchTree<Integer> mkComplicatedSampleTree() {
         BinarySearchTree<Integer> tree = new BinarySearchTree<Integer>();
+        tree.insert(1);
         tree.insert(3);
         tree.insert(5);
         tree.insert(2);
-        tree.insert(6);
-        tree.insert(4);
+        tree.insert(15);
+        tree.insert(10);
+        tree.insert(7);
+        tree.insert(12);
+        tree.insert(11);
+        tree.insert(13);
+        tree.insert(17);
+        tree.insert(20);
+        tree.insert(16);
         return tree;
     }
 
@@ -79,5 +87,20 @@ public class BinarySearchTreeTest {
         tree.delete(6);
         assertEquals(4, tree.size());
         assertFalse(tree.contains(6));
+    }
+
+    @Test
+    public void moreDeleteTest() {
+        BinarySearchTree<Integer> tree = mkComplicatedSampleTree();
+        assertEquals(13, tree.size());
+        assertTrue(tree.contains(15));
+        tree.delete(15);
+        assertEquals(12, tree.size());
+        assertFalse(tree.contains(15));
+
+        assertTrue(tree.contains(12));
+        tree.delete(12);
+        assertEquals(11, tree.size());
+        assertFalse(tree.contains(12));
     }
 }
