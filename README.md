@@ -22,17 +22,11 @@ Else, check if the left or the right subtree contains v.
 
 ## Part 2
 
-In-order Traversal: Start at the root, but don't record it. If at a node with no left branch, record the value and go down the right branch. If there is a left branch, go down the left. If at a leaf, record the value, then go up a node. If there is no left branch or it has already been visited, go down the right branch and record the value.
-
 Pre-order Traversal: If it is a leaf, return the value, and return up in the recursion. If it is a node, add the value for the Node to the list first. Then recursively call and go down the left subtree. After that recursively call go down the right subtree.
 
 In-order Traversal: If it is a leaf, return the value, and return up in the recursion. If it is a node, recursively call the left subtree and go down. Then add value to the list and recursively call the right subtree.
 
-Post-order Traversal: If it is a leaf, return the value, and return up in the recursion. If
-
-Preorder Traversal: If at a node, go down the left branch. If there is no left branch, go down the right branch. If at a leaf, go up to the node above, then check if the right branch has been visited. If not, go down the right branch. If so, go up to the next node above. 
-
-Post-Order Traversal: Start at the root, but don't record it. If at a node with no left branch, go down the right branch. If there is a left branch, go down the left. If at a leaf, record the value, then go up a node. If there is a right branch, go down the right. If at a leaf, record the value, then go up a node. If there is a left branch, go down it and record. If not, record the current value and go up until you reach the root. Then, go down the right branch if there is one. Record the root at the end. 
+Post-order Traversal: If it is a leaf, return the value, and return up in the recursion. If it is a node, recursively call the left and then the right sub tree. Eventually add the value to the list. 
 
 # Binary Search Trees
 
