@@ -118,7 +118,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
      */
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+        return this.toList().toString();
     }
 
     /**
@@ -149,25 +149,70 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
      * @implSpec <code>sort</code> runs in ___ time if the tree remains balanced. 
      */
     public static <T extends Comparable<? super T>> List<T> sort(List<T> lst) {
-        return lst.toList();
+        BinarySearchTree bst = new BinarySearchTree<>();
+        for(int i = 0; i < lst.size(); i++) {
+            bst.insert(lst.get(i));
+        }
+        return bst.toList();
     }
 
     ///// Part 5: Deletion
   
     /*
      * The three cases of deletion are:
-     * 1. (TODO: fill me in!)
-     * 2. (TODO: fill me in!)
-     * 3. (TOOD: fill me in!)
+     * 1. Node has 0 children
+     * 2. Node has 1 child
+     * 3. Node has 2 children
      */
 
     /**
      * Modifies the tree by deleting the first occurrence of <code>value</code> found
      * in the tree.
-     *
+     * Precondition: value is contained in tree
+     * 
      * @param value the value to delete
      */
     public void delete(T value) {
-        throw new UnsupportedOperationException();
+        root = deleteH(root, value);
+    }
+
+    /**
+     * deletes cur by replacing its contents with specified value
+     * @param cur node to delete
+     * @param value new content of cur
+     */
+    public Node<T> deleteH(Node<T> cur, T value) {
+        if (cur == null) {
+            return null;
+        }
+        int compare = value.compareTo(cur.value);
+        if (compare < 0) { // left subtree
+            cur.left = deleteH(cur.left, value);
+        } else if (compare > 0) { // right subtree
+            cur.right = deleteH(cur.right, value);
+        } else {
+            if (cur.left == null) { // case 1
+                return cur.right;
+            } 
+            if (cur.right == null) { // case 2
+                return cur.left;
+            }
+            // case 3
+            Node<T> min = findMin(cur.right);
+            cur.value = min.value;
+            cur.right = deleteH(cur.right, min.value);
+        }
+        return cur;
+    }
+    
+    /**
+     * Finds the minimum value in a binary search tree
+     * @param cur root of tree in which we want to find min value of
+     */
+    public Node<T> findMin(Node<T> cur) {
+        while (cur.left != null) {
+            cur = cur.left;
+        }
+        return cur;
     }
 }

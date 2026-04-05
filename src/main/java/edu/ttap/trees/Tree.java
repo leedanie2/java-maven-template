@@ -173,7 +173,7 @@ public class Tree<T> {
      */
     @Override
     public String toString() {
-        throw new UnsupportedOperationException();
+        return this.toListPreorder().toString();
     }
 
     ///// Extra: Pretty Printing
