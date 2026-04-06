@@ -1,7 +1,6 @@
 package edu.ttap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
 
 import net.jqwik.api.ForAll;
@@ -30,4 +29,9 @@ public class ExampleTests {
         }
         return sum == (n * (n - 1)) / 2;
     }
+
+        /** An example JUnit test. */
+   // @Test
+    // public void containsKeyTest() {
+       // assertEquals(2, 1 + 1); }
 }
