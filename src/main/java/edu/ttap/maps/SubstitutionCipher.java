@@ -1,7 +1,12 @@
 package edu.ttap.maps;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Scanner;
 
+import edu.ttap.maps.AssociationList.Pair;
 /**
  * A substitution cipher is a simple encryption scheme that associates each
  * letter of the alphabet with a different letter.
@@ -14,9 +19,16 @@ public class SubstitutionCipher {
      * @param filename the name of the file containing the mapping
      * @return the cipher as a mapping between characters
      */
-    public static Map<Character, Character> createCipher(String filename) {
-        // TODO: implement me!
-        throw new UnsupportedOperationException("Unimplemented method 'createCipher'");
+    public static Map<Character, Character> createCipher(String filename) throws IOException {
+        ArrayList<Pair> lst = null;
+        AssociationList<Character, Character> map = new AssociationList<>(lst);
+        Scanner scan = new Scanner(new File(filename));
+        while(scan.hasNextLine()) {
+            char key = scan.next().charAt(0);
+            char value = scan.next().charAt(0);
+            map.put(key, value);
+        }
+        return map;
     }
 
     /**
@@ -28,8 +40,12 @@ public class SubstitutionCipher {
      * @return true iff the given mapping is a valid substitution cipher
      */
     public static boolean isValidCipher(Map<Character, Character> cipher) {
-        // TODO: implement me!
-        throw new UnsupportedOperationException("Unimplemented method 'isValidCipher'");
+        for(char c = 'a'; c <= 'z'; c ++) {
+            if(!cipher.containsKey(c) && !cipher.containsValue(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -40,8 +56,12 @@ public class SubstitutionCipher {
      * @return the inverse mapping of the given cipher
      */
     public static Map<Character, Character> invertCipher(Map<Character, Character> cipher) {
-        // TODO: implement me!
-        throw new UnsupportedOperationException("Unimplemented method 'invertCipher'");
+        ArrayList<Pair> lst = null;
+        Map<Character, Character> inverse = new AssociationList<>(lst);
+        for(Map.Entry<Character, Character> entry : cipher.entrySet()) {
+            inverse.put(entry.getValue(), entry.getKey());
+        }
+        return inverse;
     }
 
     /**
@@ -51,20 +71,39 @@ public class SubstitutionCipher {
      * @return the translated string
      */
     public static String translate(String s, Map<Character, Character> mapping) {
-        // TODO: implement me!
-        throw new UnsupportedOperationException("Unimplemented method 'translate'");
+        String mapped = null;
+        for(int i = 0; i < s.length(); i++) {
+            mapped = mapped + mapping.get(s.charAt(i));
+        }
+        return mapped;
     }
+
 
     /**
      * The main driver for the substitution cipher program.
      * @param args the driver's command-line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         if (args.length != 3) {
             System.err.println(
                 "Usage: java SubstitutionCipher <encode|decode> <cipherfile> <filename>");
             System.exit(1);
         }
-        // TODO: finish implementing me!
+        String mode = args[0];
+        String path = args[1];
+        String text = args[2];
+
+        String output = "null";
+        Map<Character, Character> map = createCipher(path);
+
+        if (mode.equals("encrypt")) {
+            output = translate(text, map);
+        } else if (mode.equals("decrypt")) { 
+            map = invertCipher(map);
+            output = translate(text, map);
+        } else {
+            throw new IOException("First argument must be encrypt or decrypt!");
+        }
+        System.out.println(output);
     }
 }
