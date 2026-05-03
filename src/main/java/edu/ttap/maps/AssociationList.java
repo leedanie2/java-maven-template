@@ -10,20 +10,39 @@ import java.util.Set;
  * An association list is an implementation of a map via a list of key-value pairs.
  */
 public class AssociationList<K, V> implements Map<K, V> {
+
+    /**
+     * A pair for Association list
+     */
     public class Pair {
-    public K fst;
-    public V snd;
-    public Pair(K fst, V snd) {
-        this.fst = fst;
-        this.snd = snd;
+
+        public K fst;
+
+        public V snd;
+
+        /**
+         * Constructs a new Pair with the specified elements.
+         *
+         * @param fst the first element of the pair
+         * @param snd the second element of the pair
+         */
+        public Pair(K fst, V snd) {
+            this.fst = fst;
+            this.snd = snd;
+        }
     }
-}
 
     private ArrayList<Pair> lst;
 
-    public AssociationList (ArrayList lst) {
+    /**
+     * Constructs a new AssociationList with the specified list.
+     *
+     * @param lst the ArrayList storing content of this association list
+     */
+    public AssociationList(ArrayList lst) {
         this.lst = lst;
     }
+
     /**
      * Clears the association list, removing all key-value pairs.
      */
@@ -38,8 +57,8 @@ public class AssociationList<K, V> implements Map<K, V> {
      */
     @Override
     public boolean containsKey(Object key) {
-        for(Pair p : lst) {
-            if( (p.fst).equals(key) ) {
+        for (Pair p : lst) {
+            if ((p.fst).equals(key)) {
                 return true;
             }
         }
@@ -52,8 +71,8 @@ public class AssociationList<K, V> implements Map<K, V> {
      */
     @Override
     public boolean containsValue(Object value) {
-        for(Pair p : lst) {
-            if( (p.snd).equals(value) ) {
+        for (Pair p : lst) {
+            if ((p.snd).equals(value)) {
                 return true;
             }
         }
@@ -77,8 +96,8 @@ public class AssociationList<K, V> implements Map<K, V> {
     @Override
     public V get(Object key) {
         V val = null;
-        for(Pair p : lst) {
-            if( (p.fst).equals(key) ) {
+        for (Pair p : lst) {
+            if ((p.fst).equals(key)) {
                 val = p.snd;
             }
         }
@@ -99,7 +118,7 @@ public class AssociationList<K, V> implements Map<K, V> {
     @Override
     public Set<K> keySet() {
         HashSet<K> hash = new HashSet();
-        for(Pair p : lst) {
+        for (Pair p : lst) {
             hash.add(p.fst);
         }
         return hash;
@@ -116,13 +135,13 @@ public class AssociationList<K, V> implements Map<K, V> {
     @Override
     public V put(K key, V value) {
         V prev = null;
-        for(Pair p : lst) {
-            if(p.fst.equals(key)) {
+        for (Pair p : lst) {
+            if (p.fst.equals(key)) {
                 prev = p.snd;
                 p.snd = value;
             }
         }
-        if(prev == null) {
+        if (prev == null) {
             lst.add(new Pair(key, value));
         }
         return prev;
@@ -149,8 +168,8 @@ public class AssociationList<K, V> implements Map<K, V> {
     @Override
     public V remove(Object key) {
         V prev = null;
-        for(Pair p : lst) {
-            if(p.fst.equals(key)) {
+        for (Pair p : lst) {
+            if (p.fst.equals(key)) {
                 prev = p.snd;
                 lst.remove(p);
             }
@@ -164,8 +183,8 @@ public class AssociationList<K, V> implements Map<K, V> {
     @Override
     public int size() {
         int mapsize = 0;
-        for(Pair p : lst) {
-           mapsize++; 
+        for (int i = 0; i < lst.size(); i++) {
+            mapsize++; 
         }
         return mapsize;
     }
@@ -176,7 +195,7 @@ public class AssociationList<K, V> implements Map<K, V> {
     @Override
     public Collection<V> values() {
         ArrayList<V> values = new ArrayList<>();
-        for(Pair p : lst) {
+        for (Pair p : lst) {
             values.add(p.snd);
         }
         return values;
