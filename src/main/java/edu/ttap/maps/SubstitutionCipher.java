@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import edu.ttap.maps.AssociationList.Pair;
+
 /**
  * A substitution cipher is a simple encryption scheme that associates each
  * letter of the alphabet with a different letter.
@@ -23,7 +24,7 @@ public class SubstitutionCipher {
         ArrayList<Pair> lst = null;
         AssociationList<Character, Character> map = new AssociationList<>(lst);
         Scanner scan = new Scanner(new File(filename));
-        while(scan.hasNextLine()) {
+        while (scan.hasNextLine()) {
             char key = scan.next().charAt(0);
             char value = scan.next().charAt(0);
             map.put(key, value);
@@ -40,8 +41,8 @@ public class SubstitutionCipher {
      * @return true iff the given mapping is a valid substitution cipher
      */
     public static boolean isValidCipher(Map<Character, Character> cipher) {
-        for(char c = 'a'; c <= 'z'; c ++) {
-            if(!cipher.containsKey(c) && !cipher.containsValue(c)) {
+        for (char c = 'a'; c <= 'z'; c++) {
+            if (!cipher.containsKey(c) && !cipher.containsValue(c)) {
                 return false;
             }
         }
@@ -58,7 +59,7 @@ public class SubstitutionCipher {
     public static Map<Character, Character> invertCipher(Map<Character, Character> cipher) {
         ArrayList<Pair> lst = null;
         Map<Character, Character> inverse = new AssociationList<>(lst);
-        for(Map.Entry<Character, Character> entry : cipher.entrySet()) {
+        for (Map.Entry<Character, Character> entry : cipher.entrySet()) {
             inverse.put(entry.getValue(), entry.getKey());
         }
         return inverse;
@@ -72,7 +73,7 @@ public class SubstitutionCipher {
      */
     public static String translate(String s, Map<Character, Character> mapping) {
         String mapped = null;
-        for(int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < s.length(); i++) {
             mapped = mapped + mapping.get(s.charAt(i));
         }
         return mapped;

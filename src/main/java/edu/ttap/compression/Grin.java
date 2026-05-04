@@ -18,7 +18,7 @@ public class Grin {
         BitOutputStream out = new BitOutputStream(outfile);
 
         int magic = in.readBits(32);
-        if(magic != 0x736) {
+        if (magic != 0x736) {
             throw new IllegalArgumentException("Not a valid .grin file");
         }
 
@@ -34,7 +34,7 @@ public class Grin {
      * @throws IOException 
      */
     public static void main(String[] args) throws IOException {
-        if(args.length != 2) {
+        if (args.length != 2) {
             System.out.println("Need exactly two arguments");
             System.exit(1);
         }

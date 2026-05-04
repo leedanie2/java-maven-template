@@ -14,9 +14,14 @@ package edu.ttap.compression;
  */
 public class HuffmanTree {
 
+    /**
+     * Represents a node in a binary tree.
+     */
     public static class Node {
         public short value;
+
         public Node left;
+
         public Node right;
 
         /**
@@ -32,6 +37,7 @@ public class HuffmanTree {
     }
     
     private Node root;
+
     /**
      * Constructs a new HuffmanTree from the given file.
      * @param in the input file (as a BitInputStream)
@@ -43,18 +49,20 @@ public class HuffmanTree {
     /**
      * Recursively reads tree bits and returns nodes in order
      * @param in the input file (as a BitInputStream)
+     * 
+     * @return node the node newly created
      */
     public Node treeH(BitInputStream in) {
         int bit = in.readBit();
         if (bit == -1) {
             throw new IllegalArgumentException();
-        } else if(bit == 0) { // is a leaf
-            short value = (short)in.readBits(9);
+        } else if (bit == 0) { // is a leaf
+            short value = (short) in.readBits(9);
             return new Node(value, null, null);
         } else { // is a node, has children
             Node left = treeH(in);
             Node right = treeH(in);
-            return new Node((short)0, left, right);
+            return new Node((short) 0, left, right);
         }
     }
 
@@ -69,14 +77,14 @@ public class HuffmanTree {
     public void decode(BitInputStream in, BitOutputStream out) {
         Node cur = root;
         int bit;
-        while ( (bit = in.readBit()) != -1 ) {
-            if(bit == 0) {
+        while ((bit = in.readBit()) != -1) {
+            if (bit == 0) {
                 cur = cur.left;
             } else {
                 cur = cur.right;
             }
-            if(cur.right == null && cur.left == null) { // leaf
-                if(cur.value == 256) { // eof
+            if (cur.right == null && cur.left == null) { // leaf
+                if (cur.value == 256) { // eof
                     break;
                 }
                 out.writeBits(cur.value, 8);

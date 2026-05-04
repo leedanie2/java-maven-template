@@ -14,8 +14,11 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
      * A node of the binary search tree.
      */
     private static class Node<T> {
+
         public T value;
+        
         public Node<T> left;
+        
         public Node<T> right;
 
         /**
@@ -75,7 +78,13 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
         root = insertH(v, root);
     }
 
-    /** @return the updated tree after inserting h into the given tree */
+    /** 
+     * Insert method's helper method
+     * @param v the value to insert
+     * @param cur the current node
+     *  
+     * @return the updated tree after inserting h into the given tree
+     */
     private Node<T> insertH(T v, Node<T> cur) {
         if (cur == null) {
             return new Node<>(v);
@@ -102,6 +111,8 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
     /**
      * @param cur the current node we are checking
      * @param v the value we want to find
+     * 
+     * @return false if the cur is null; true if the cur equals v
      */
     public boolean containsH(Node<T> cur, T v) {
         if (cur == null) {
@@ -138,8 +149,8 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
      * @param cur current node you are traversing through in order
      * @param list cumulative list that contains elements of bst
      */
-    public void toListH (Node<T> cur, LinkedList<T> list) {
-        if(cur == null) {
+    public void toListH(Node<T> cur, LinkedList<T> list) {
+        if (cur == null) {
             return;
         }
         toListH(cur.left, list);
@@ -158,7 +169,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
      */
     public static <T extends Comparable<? super T>> List<T> sort(List<T> lst) {
         BinarySearchTree bst = new BinarySearchTree<>();
-        for(int i = 0; i < lst.size(); i++) {
+        for (int i = 0; i < lst.size(); i++) {
             bst.insert(lst.get(i));
         }
         return bst.toList();
@@ -188,6 +199,8 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
      * deletes cur by replacing its contents with specified value
      * @param cur node to delete
      * @param value new content of cur
+     * 
+     * @return cur the node being deleted
      */
     public Node<T> deleteH(Node<T> cur, T value) {
         if (cur == null) {
@@ -216,6 +229,8 @@ public class BinarySearchTree<T extends Comparable<? super T>> {
     /**
      * Finds the minimum value in a binary search tree
      * @param cur root of tree in which we want to find min value of
+     * 
+     * @return cur the node that has the minimun value
      */
     public Node<T> findMin(Node<T> cur) {
         while (cur.left != null) {

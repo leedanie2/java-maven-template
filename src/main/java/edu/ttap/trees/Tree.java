@@ -11,8 +11,11 @@ public class Tree<T> {
      * A node of the binary tree.
      */
     public static class Node<T> {
+
         public T value;
+
         public Node<T> left;
+
         public Node<T> right;
 
         /**
@@ -101,6 +104,7 @@ public class Tree<T> {
             return containsH(node.left, value) || containsH(node.right, value);
         }
     }
+
     /**
      * @param value the value to search for
      * @return true iff the tree contains <code>value</code>
@@ -124,8 +128,8 @@ public class Tree<T> {
      * @param cur current node that is being traversed in-order
      * @param list cumulative list that contains all the elements in-order
      */
-    public void toListInOrderH (Node<T> cur, LinkedList<T> list) {
-        if(cur == null) {
+    public void toListInOrderH(Node<T> cur, LinkedList<T> list) {
+        if (cur == null) {
             return;
         }
         toListInOrderH(cur.left, list);
@@ -146,8 +150,8 @@ public class Tree<T> {
      * @param cur current node that is being traversed pre-order
      * @param list cumulative list that contains all the elements pre-order
      */
-    public void toListPreOrderH (Node<T> cur, LinkedList<T> list) {
-        if(cur == null) {
+    public void toListPreOrderH(Node<T> cur, LinkedList<T> list) {
+        if (cur == null) {
             return;
         }
         list.add(cur.value);
@@ -168,8 +172,8 @@ public class Tree<T> {
      * @param cur current node that is being traversed post-order
      * @param list cumulative list that contains all the elements post-order
      */
-    public void toListPostOrderH (Node<T> cur, LinkedList<T> list) {
-        if(cur == null) {
+    public void toListPostOrderH(Node<T> cur, LinkedList<T> list) {
+        if (cur == null) {
             return;
         }
         toListPostOrderH(cur.left, list);
